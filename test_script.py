@@ -4,12 +4,6 @@ from openai import OpenAI
 import api_key  # Import the API key from api_key.py
 import json
 
-# find_dotenv does not seem to work
-#print("Found .env at:", find_dotenv())
-# # Load environment variables
-# load_dotenv(dotenv_path="C:\\MY_FILES\\DAVA_X\\EssentialsOfLLM\\.env")
-#api_key = os.getenv("OPENAI_API_KEY")
-
 api_key = os.getenv("OPENAI_API_KEY")
 #print("Loaded key:", api_key)
 

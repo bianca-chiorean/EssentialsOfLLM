@@ -1,0 +1,42 @@
+[
+  {
+    "title": "1984",
+    "summary": "A dystopian story about a totalitarian society controlled by surveillance, propaganda, and thought police. Winston Smith, the protagonist, secretly rebels against the system in search of truth and freedom. Themes: totalitarianism, freedom, resistance, manipulation."
+  },
+  {
+    "title": "The Hobbit",
+    "summary": "Bilbo Baggins embarks on an unexpected journey with a group of dwarves to reclaim a lost treasure guarded by the dragon Smaug. Along the way, he discovers bravery and friendship in the face of danger. Themes: adventure, personal growth, courage, friendship."
+  },
+  {
+    "title": "To Kill a Mockingbird",
+    "summary": "In the racially segregated American South, young Scout Finch learns about justice and empathy as her father defends a black man wrongly accused of a crime. Themes: justice, racism, innocence, moral growth."
+  },
+  {
+    "title": "Fahrenheit 451",
+    "summary": "In a world where books are banned, fireman Guy Montag begins to question his role in suppressing knowledge and seeks truth through forbidden literature. Themes: censorship, knowledge, conformity, rebellion."
+  },
+  {
+    "title": "The Catcher in the Rye",
+    "summary": "Holden Caulfield wanders through New York City, struggling with alienation and the transition to adulthood after being expelled from school. Themes: identity, isolation, adolescence, authenticity."
+  },
+  {
+    "title": "Brave New World",
+    "summary": "Set in a futuristic society obsessed with pleasure and control, individuals are conditioned from birth to accept their roles. Bernard Marx begins to question this utopia. Themes: control, individuality, technology, dehumanization."
+  },
+  {
+    "title": "The Great Gatsby",
+    "summary": "Jay Gatsby's obsessive love for Daisy Buchanan drives him to recreate the past in the roaring 1920s, but reality and illusion collide. Themes: love, illusion, wealth, the American Dream."
+  },
+  {
+    "title": "Animal Farm",
+    "summary": "Farm animals overthrow their human owner to create a society of equals, but corruption and power soon replicate the tyranny they fought against. Themes: power, corruption, equality, revolution."
+  },
+  {
+    "title": "Lord of the Flies",
+    "summary": "A group of boys stranded on an island try to govern themselves but descend into savagery and chaos, revealing the fragility of civilization. Themes: civilization vs. savagery, leadership, human nature."
+  },
+  {
+    "title": "Pride and Prejudice",
+    "summary": "Elizabeth Bennet navigates love, class, and family expectations while challenging societal norms and overcoming misunderstandings with Mr. Darcy. Themes: love, class, pride, personal growth."
+  }
+]

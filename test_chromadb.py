@@ -3,6 +3,49 @@ import json
 from openai import OpenAI
 import api_key  # Load API key from module
 from chromadb import PersistentClient
+from openai.types.chat import ChatCompletionMessageToolCall
+
+# Dictionary of full summaries
+book_summaries_dict = {
+    "The Hobbit": (
+        "Bilbo Baggins, un hobbit confortabil și fără aventuri, este luat prin surprindere "
+        "atunci când este invitat într-o misiune de a recupera comoara piticilor păzită de dragonul Smaug. "
+        "Pe parcursul călătoriei, el descoperă curajul și resursele interioare pe care nu știa că le are. "
+        "Povestea este plină de creaturi fantastice, prietenii neașteptate și momente tensionate."
+    ),
+    "1984": (
+        "Romanul lui George Orwell descrie o societate distopică aflată sub controlul total al statului. "
+        "Oamenii sunt supravegheați constant de „Big Brother”, iar gândirea liberă este considerată crimă. "
+        "Winston Smith, personajul principal, încearcă să reziste acestui regim opresiv. "
+        "Este o poveste despre libertate, adevăr și manipulare ideologică."
+    )
+}
+
+
+# Tool function
+def get_summary_by_title(title: str) -> str:
+    return book_summaries_dict.get(title, "Titlul nu a fost găsit în baza de date.")
+
+# Tool schema for OpenAI function calling
+function_tools = [
+    {
+        "type": "function",
+        "function": {
+            "name": "get_summary_by_title",
+            "description": "Returnează rezumatul complet al unei cărți după titlu exact.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "description": "Titlul cărții (exact)"
+                    }
+                },
+                "required": ["title"]
+            }
+        }
+    }
+]
 
 
 class BookVectorStore:
@@ -95,9 +138,50 @@ class BookRecommenderApp:
             print("-", doc[:100], "...")
 
         # 3. Generate GPT response
-        response = GPTClient.generate_recommendation(self.query, matches)
-        print("\nChatGPT response:")
-        print(response)
+        # response = GPTClient.generate_recommendation(self.query, matches)
+        # print("\nChatGPT response:")
+        # print(response)
+        # Prepare the prompt and context
+        context = "\n---\n".join(matches)
+        prompt = f"""Recomandă o carte potrivită bazat pe rezumatul acestor cărți.
+
+        Întrebarea utilizatorului: "{self.query}"
+
+        Rezumate:
+        {context}
+
+        Recomandă titlul (exact), apoi apelează tool-ul pentru a oferi rezumatul complet.
+        """
+
+        # Initial GPT call with tool available
+        chat_response = GPTClient.client.chat.completions.create(
+            model="gpt-4",
+            messages=[
+                {"role": "system", "content": "Ești un asistent prietenos care recomandă cărți."},
+                {"role": "user", "content": prompt}
+            ],
+            tools=function_tools,
+            tool_choice="auto"
+        )
+
+        # Show GPT reply
+        message = chat_response.choices[0].message
+        print("\nChatGPT recommendation:")
+        print(message.content or "")
+
+        # Check for tool call
+        tool_calls = message.tool_calls
+        if tool_calls:
+            print("\nTool calls detected:")
+            for call in tool_calls:
+                if call.function.name == "get_summary_by_title":
+                    args = json.loads(call.function.arguments)
+                    title = args["title"]
+
+                    summary = get_summary_by_title(title)
+                    print(f"\nRezumat complet pentru '{title}':")
+                    print(summary)
+
 
 
 if __name__ == "__main__":

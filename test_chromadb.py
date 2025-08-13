@@ -61,6 +61,6 @@ results = collection.query(
     n_results=3  # return top 3 most similar
 )
 
-print("🔍 Top matches:")
+print("Top matches:")
 for doc in results["documents"][0]:
     print("-", doc[:100], "...")

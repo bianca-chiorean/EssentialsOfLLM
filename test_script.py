@@ -6,7 +6,7 @@ import json
 
 api_key = os.getenv("OPENAI_API_KEY")
 
-client = OpenAI(api_key=api_key)  # Will use OPENAI_API_KEY from environment
+client = OpenAI(api_key=api_key) 
 
 print("OpenAI API key loaded.")
 
